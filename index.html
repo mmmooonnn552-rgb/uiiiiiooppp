@@ -2,671 +2,599 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<title>احصل على إنترنت</title>
 
-  <title>إنترنت نت لجميع الشبكات</title>
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Tahoma, Arial, sans-serif;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at top,#101c2d 0%,#07090d 40%,#020202 100%);
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:18px;
+    overflow-x:hidden;
+}
+
+.container{
+    width:100%;
+    max-width:470px;
+    background:rgba(15,17,23,.88);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:25px;
+    padding:25px 18px;
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.65),
+        0 0 35px rgba(0,140,255,.08);
+    backdrop-filter:blur(15px);
+}
+
+.logo{
+    width:65px;
+    height:65px;
+    margin:0 auto 15px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+    background:linear-gradient(135deg,#168cff,#744cff);
+    box-shadow:0 0 30px rgba(30,130,255,.35);
+}
+
+h1{
+    text-align:center;
+    font-size:23px;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#8f98a8;
+    font-size:13px;
+    margin-bottom:25px;
+}
+
+.stage{
+    display:none;
+    animation:fade .5s ease;
+}
+
+.stage.active{
+    display:block;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.timer{
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    margin:15px auto 25px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle,#10151d 58%,transparent 59%),
+        conic-gradient(#168cff var(--progress),#202631 0);
+    box-shadow:
+        0 0 35px rgba(22,140,255,.18),
+        inset 0 0 30px rgba(0,0,0,.5);
+}
+
+.time{
+    font-size:35px;
+    font-weight:bold;
+    direction:ltr;
+    letter-spacing:2px;
+}
+
+.time-label{
+    color:#8993a3;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.message{
+    text-align:center;
+    font-size:15px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.warning{
+    background:rgba(255,170,0,.07);
+    border:1px solid rgba(255,170,0,.18);
+    color:#ffc85a;
+    padding:13px;
+    border-radius:14px;
+    text-align:center;
+    font-size:12px;
+    line-height:1.7;
+}
+
+.progress-box{
+    margin-top:18px;
+    height:5px;
+    background:#20242c;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#168cff,#8a4dff);
+    transition:width 1s linear;
+}
+
+.buttons{
+    display:grid;
+    gap:13px;
+    margin-top:20px;
+}
+
+.download-btn{
+    width:100%;
+    border:0;
+    padding:17px 15px;
+    border-radius:16px;
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    background:linear-gradient(135deg,#111923,#192434);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+    transition:.25s;
+}
+
+.download-btn:hover{
+    transform:translateY(-2px);
+    border-color:#168cff;
+    box-shadow:0 0 22px rgba(22,140,255,.18);
+}
+
+.download-btn:active{
+    transform:scale(.98);
+}
+
+.orange{
+    border-right:4px solid #ff7900;
+}
+
+.etisalat{
+    border-right:4px solid #00a651;
+}
+
+.giga{
+    border-right:4px solid #168cff;
+}
+
+.code-box{
+    margin-top:20px;
+}
+
+.code-label{
+    color:#9ca6b6;
+    font-size:13px;
+    margin-bottom:8px;
+    display:block;
+}
+
+.code-display{
+    background:#080b10;
+    border:1px solid #242c38;
+    border-radius:14px;
+    padding:17px;
+    text-align:center;
+    font-size:25px;
+    font-weight:bold;
+    letter-spacing:5px;
+    color:#48a9ff;
+    direction:ltr;
+    box-shadow:inset 0 0 20px rgba(0,0,0,.35);
+}
+
+input{
+    width:100%;
+    padding:16px;
+    margin-top:12px;
+    border-radius:14px;
+    border:1px solid #293241;
+    outline:none;
+    background:#090c11;
+    color:#fff;
+    text-align:center;
+    font-size:17px;
+    direction:ltr;
+}
+
+input:focus{
+    border-color:#168cff;
+    box-shadow:0 0 15px rgba(22,140,255,.12);
+}
+
+.confirm{
+    width:100%;
+    margin-top:12px;
+    padding:16px;
+    border:0;
+    border-radius:14px;
+    background:linear-gradient(135deg,#168cff,#714cff);
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.error{
+    display:none;
+    text-align:center;
+    color:#ff6565;
+    font-size:13px;
+    margin-top:10px;
+}
+
+.success{
+    text-align:center;
+    color:#6cffae;
+    font-size:13px;
+    margin-top:12px;
+    display:none;
+}
+
+.footer{
+    text-align:center;
+    color:#555e6d;
+    font-size:11px;
+    margin-top:22px;
+}
+
+@media(max-width:380px){
+    .container{
+        padding:22px 14px;
     }
 
-    body {
-      min-height: 100vh;
-      font-family: Arial, Tahoma, sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(0, 119, 255, .18), transparent 35%),
-        radial-gradient(circle at bottom left, rgba(120, 0, 255, .14), transparent 35%),
-        #05070b;
-      color: #fff;
-      overflow-x: hidden;
+    h1{
+        font-size:20px;
     }
 
-    /* تأثير الخلفية */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
-      background-size: 35px 35px;
-      mask-image: linear-gradient(to bottom, black, transparent);
+    .timer{
+        width:170px;
+        height:170px;
     }
 
-    .container {
-      width: 100%;
-      max-width: 520px;
-      margin: auto;
-      padding: 18px 15px 40px;
-      position: relative;
-      z-index: 1;
+    .time{
+        font-size:31px;
     }
-
-    /* الهيدر */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 14px 15px;
-      margin-bottom: 35px;
-
-      background: rgba(255,255,255,.045);
-      border: 1px solid rgba(255,255,255,.09);
-      border-radius: 18px;
-      backdrop-filter: blur(18px);
-      box-shadow: 0 10px 40px rgba(0,0,0,.35);
-    }
-
-    .developer {
-      font-size: 15px;
-      font-weight: 800;
-      color: #fff;
-      text-shadow:
-        0 0 8px rgba(0,174,255,.7),
-        0 0 20px rgba(0,174,255,.25);
-    }
-
-    .contact-btn {
-      text-decoration: none;
-      color: white;
-      background: linear-gradient(135deg, #087f3e, #16c765);
-      border: 0;
-      padding: 9px 13px;
-      border-radius: 11px;
-      font-size: 12px;
-      font-weight: bold;
-      box-shadow: 0 0 18px rgba(22,199,101,.25);
-      transition: .2s;
-      white-space: nowrap;
-    }
-
-    .contact-btn:active {
-      transform: scale(.94);
-    }
-
-    /* العنوان */
-    .hero {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
-    .network-icon {
-      width: 75px;
-      height: 75px;
-      margin: 0 auto 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 23px;
-      font-size: 34px;
-
-      background: linear-gradient(145deg, #101722, #080b11);
-      border: 1px solid rgba(0,174,255,.3);
-      box-shadow:
-        0 0 30px rgba(0,174,255,.15),
-        inset 0 0 20px rgba(0,174,255,.04);
-    }
-
-    h1 {
-      font-size: clamp(26px, 7vw, 38px);
-      line-height: 1.2;
-      margin-bottom: 12px;
-
-      background: linear-gradient(90deg, #fff, #67cfff, #b68cff, #fff);
-      background-size: 250%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient 5s linear infinite;
-    }
-
-    @keyframes gradient {
-      0% { background-position: 0%; }
-      100% { background-position: 250%; }
-    }
-
-    .subtitle {
-      color: #8f9aaa;
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    /* الكروت */
-    .networks {
-      display: grid;
-      gap: 15px;
-    }
-
-    .network-card {
-      position: relative;
-      padding: 20px;
-      min-height: 145px;
-
-      border-radius: 22px;
-      background:
-        linear-gradient(145deg,
-        rgba(255,255,255,.07),
-        rgba(255,255,255,.025));
-
-      border: 1px solid rgba(255,255,255,.09);
-      backdrop-filter: blur(18px);
-
-      overflow: hidden;
-      transition: .25s ease;
-    }
-
-    .network-card::before {
-      content: "";
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      right: -70px;
-      top: -80px;
-      filter: blur(35px);
-      opacity: .25;
-    }
-
-    .etisalat::before {
-      background: #00d66b;
-    }
-
-    .orange::before {
-      background: #ff7900;
-    }
-
-    .network-card:active {
-      transform: scale(.975);
-    }
-
-    .network-top {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin-bottom: 14px;
-    }
-
-    .network-logo {
-      width: 48px;
-      height: 48px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 20px;
-      color: #fff;
-      position: relative;
-      z-index: 2;
-    }
-
-    .etisalat .network-logo {
-      background: linear-gradient(135deg, #087b3c, #00d66b);
-      box-shadow: 0 0 20px rgba(0,214,107,.25);
-    }
-
-    .orange .network-logo {
-      background: linear-gradient(135deg, #c94d00, #ff7900);
-      box-shadow: 0 0 20px rgba(255,121,0,.25);
-    }
-
-    .network-name {
-      font-size: 19px;
-      font-weight: 800;
-    }
-
-    .network-desc {
-      font-size: 12px;
-      color: #858e9d;
-    }
-
-    .download-btn {
-      width: 100%;
-      border: 0;
-      border-radius: 13px;
-      padding: 13px;
-
-      color: #fff;
-      font-size: 13px;
-      font-weight: 800;
-
-      cursor: pointer;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.08);
-      transition: .2s;
-    }
-
-    .etisalat .download-btn:hover {
-      background: rgba(0,214,107,.14);
-      border-color: rgba(0,214,107,.35);
-    }
-
-    .orange .download-btn:hover {
-      background: rgba(255,121,0,.14);
-      border-color: rgba(255,121,0,.35);
-    }
-
-    /* الفوتر */
-    footer {
-      text-align: center;
-      margin-top: 35px;
-      color: #5f6875;
-      font-size: 11px;
-    }
-
-    /* نافذة التحقق */
-    .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-
-      display: none;
-      align-items: center;
-      justify-content: center;
-
-      padding: 20px;
-      background: rgba(0,0,0,.72);
-      backdrop-filter: blur(12px);
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-box {
-      width: 100%;
-      max-width: 390px;
-
-      padding: 25px 20px;
-      border-radius: 24px;
-
-      background:
-        linear-gradient(145deg,
-        rgba(18,23,32,.97),
-        rgba(6,9,14,.98));
-
-      border: 1px solid rgba(255,255,255,.1);
-      box-shadow:
-        0 25px 80px rgba(0,0,0,.7),
-        0 0 40px rgba(0,140,255,.08);
-
-      animation: popup .25s ease;
-    }
-
-    @keyframes popup {
-      from {
-        opacity: 0;
-        transform: scale(.92) translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
-    }
-
-    .modal-icon {
-      width: 58px;
-      height: 58px;
-      margin: 0 auto 15px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 18px;
-      background: rgba(0,150,255,.1);
-      border: 1px solid rgba(0,174,255,.2);
-      font-size: 25px;
-    }
-
-    .modal-box h2 {
-      text-align: center;
-      font-size: 21px;
-      margin-bottom: 8px;
-    }
-
-    .modal-box p {
-      text-align: center;
-      color: #858e9d;
-      font-size: 12px;
-      line-height: 1.7;
-      margin-bottom: 18px;
-    }
-
-    .code-input {
-      width: 100%;
-      height: 48px;
-
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 13px;
-      outline: none;
-
-      background: rgba(255,255,255,.05);
-      color: #fff;
-
-      text-align: center;
-      font-size: 16px;
-      letter-spacing: 2px;
-
-      transition: .2s;
-    }
-
-    .code-input:focus {
-      border-color: #00aaff;
-      box-shadow: 0 0 18px rgba(0,170,255,.12);
-    }
-
-    .code-input::placeholder {
-      color: #626b78;
-      letter-spacing: 0;
-    }
-
-    .request-code {
-      display: block;
-      text-align: center;
-      text-decoration: none;
-
-      margin-top: 12px;
-      padding: 10px;
-
-      border-radius: 11px;
-      background: rgba(22,199,101,.08);
-      border: 1px solid rgba(22,199,101,.2);
-
-      color: #35df83;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .verify-btn {
-      width: 100%;
-      border: 0;
-      margin-top: 14px;
-      padding: 13px;
-
-      border-radius: 13px;
-      color: #fff;
-      font-weight: 800;
-      font-size: 13px;
-
-      cursor: pointer;
-      background: linear-gradient(135deg, #0077ff, #7447ff);
-      box-shadow: 0 8px 25px rgba(45,105,255,.2);
-    }
-
-    .close-btn {
-      width: 100%;
-      border: 0;
-      margin-top: 9px;
-      padding: 11px;
-
-      border-radius: 12px;
-      background: transparent;
-      color: #737d8b;
-
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .error {
-      display: none;
-      text-align: center;
-      color: #ff5d6c;
-      font-size: 11px;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 360px) {
-      .container {
-        padding-left: 11px;
-        padding-right: 11px;
-      }
-
-      header {
-        padding: 12px;
-      }
-
-      .developer {
-        font-size: 13px;
-      }
-
-      .contact-btn {
-        font-size: 11px;
-        padding: 8px 10px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <main class="container">
+<div class="container">
 
-    <header>
-      <div class="developer">✦ تطوير محمد حسن</div>
+    <div class="logo">⚡</div>
 
-      <a
-        class="contact-btn"
-        href="https://wa.me/201116502378"
-        target="_blank"
-        rel="noopener">
-        💬 للتواصل
-      </a>
-    </header>
+    <h1>احصل على إنترنت لجميع الشبكات</h1>
+    <div class="subtitle">جارٍ تجهيز الملفات المطلوبة</div>
 
-    <section class="hero">
 
-      <div class="network-icon">
-        📡
-      </div>
+    <!-- المرحلة الأولى -->
+    <div class="stage active" id="stage1">
 
-      <h1>إنترنت نت لجميع الشبكات</h1>
-
-      <p class="subtitle">
-        اختر الشبكة الخاصة بك للحصول على الملف
-      </p>
-
-    </section>
-
-    <section class="networks">
-
-      <!-- اتصالات -->
-      <div class="network-card etisalat">
-
-        <div class="network-top">
-
-          <div class="network-logo">
-            e&
-          </div>
-
-          <div>
-            <div class="network-name">اتصالات</div>
-            <div class="network-desc">ملف إعدادات الشبكة</div>
-          </div>
-
+        <div class="timer" id="timer1" style="--progress:0deg">
+            <div class="time" id="time1">10:00</div>
+            <div class="time-label">دقائق متبقية</div>
         </div>
 
-        <button
-          class="download-btn"
-          onclick="openVerify('etisalat')">
-          الحصول على الملف
-        </button>
-
-      </div>
-
-      <!-- أورنج -->
-      <div class="network-card orange">
-
-        <div class="network-top">
-
-          <div class="network-logo">
-            O
-          </div>
-
-          <div>
-            <div class="network-name">أورنج</div>
-            <div class="network-desc">ملف إعدادات الشبكة</div>
-          </div>
-
+        <div class="message">
+            انتظر انتهاء الوقت
         </div>
 
-        <button
-          class="download-btn"
-          onclick="openVerify('orange')">
-          الحصول على الملف
-        </button>
+        <div class="warning">
+            ⚠️ تحذير<br>
+            لا تخرج من البرنامج أو تغلق الصفحة حتى انتهاء المرحلة.
+        </div>
 
-      </div>
-
-    </section>
-
-    <footer>
-      © 2026 — تطوير محمد حسن
-    </footer>
-
-  </main>
-
-
-  <!-- نافذة التحقق -->
-  <div class="modal" id="verifyModal">
-
-    <div class="modal-box">
-
-      <div class="modal-icon">
-        🔐
-      </div>
-
-      <h2>رمز التحقق</h2>
-
-      <p>
-        للحصول على الملف، أدخل رمز التحقق الخاص بك.
-      </p>
-
-      <input
-        id="codeInput"
-        class="code-input"
-        type="text"
-        placeholder="أدخل رمز التحقق"
-        autocomplete="off"
-      >
-
-      <a
-        class="request-code"
-        href="https://wa.me/201116502378?text=السلام%20عليكم،%20أريد%20طلب%20رمز%20التحقق"
-        target="_blank"
-        rel="noopener">
-        📱 اطلب الكود
-      </a>
-
-      <button
-        class="verify-btn"
-        onclick="verifyCode()">
-        فتح الملف
-      </button>
-
-      <div class="error" id="errorMessage">
-        ❌ رمز التحقق غير صحيح
-      </div>
-
-      <button
-        class="close-btn"
-        onclick="closeModal()">
-        إغلاق
-      </button>
+        <div class="progress-box">
+            <div class="progress-bar" id="bar1"></div>
+        </div>
 
     </div>
 
-  </div>
+
+    <!-- المرحلة الثانية -->
+    <div class="stage" id="stage2">
+
+        <div class="timer" id="timer2" style="--progress:0deg">
+            <div class="time" id="time2">02:00</div>
+            <div class="time-label">المرحلة الأخيرة</div>
+        </div>
+
+        <div class="message">
+            تم — انتظر آخر مرحلة
+        </div>
+
+        <div class="warning">
+            ⚠️ تحذير<br>
+            لا تخرج من البرنامج أو تغلق الصفحة حتى انتهاء المرحلة.
+        </div>
+
+        <div class="progress-box">
+            <div class="progress-bar" id="bar2"></div>
+        </div>
+
+    </div>
 
 
-  <script>
+    <!-- الأزرار -->
+    <div class="stage" id="stage3">
 
-    const VERIFY_CODE = "mido299";
+        <div class="message">
+            اختر الملف المناسب لك
+        </div>
 
-    const links = {
-      etisalat:
-        "https://www.mediafire.com/file/7ipjykuzjjqvgxf/%25D8%25%AE%25D8%25B7_%25D8%25%A7%25D8%25%AA%25D8%25%B5%25D8%25%A7%25%D9%84%25D8%25%A7%25D8%AA_Hakamo_%25281%2529.npvt/file",
+        <div class="subtitle">
+            اضغط على الشبكة المطلوبة للمتابعة
+        </div>
 
-      orange:
-        "https://www.mediafire.com/file/mw5zu0yl8gke523/mido_Orange_%25F0%259F%25A7%25A1.npvt/file"
-    };
+        <div class="buttons">
 
-    let selectedNetwork = null;
+            <button class="download-btn orange"
+                onclick="selectFile('orange')">
+                🟠 خط أورنج
+            </button>
 
-    function openVerify(network) {
+            <button class="download-btn etisalat"
+                onclick="selectFile('etisalat')">
+                🟢 خط إتصالات
+            </button>
 
-      selectedNetwork = network;
+            <button class="download-btn giga"
+                onclick="selectFile('giga')">
+                🔵 1 جيجا نت كل يوم
+            </button>
 
-      document.getElementById("verifyModal")
-        .classList.add("show");
+        </div>
 
-      document.getElementById("codeInput").value = "";
+    </div>
 
-      document.getElementById("errorMessage").style.display = "none";
 
-      setTimeout(() => {
-        document.getElementById("codeInput").focus();
-      }, 200);
+    <!-- مرحلة الكود -->
+    <div class="stage" id="stage4">
 
+        <div class="message">
+            التحقق من الطلب
+        </div>
+
+        <div class="code-box">
+
+            <span class="code-label">
+                ضع الكود الظاهر أمامك:
+            </span>
+
+            <div class="code-display">
+                ttio33
+            </div>
+
+            <input
+                id="codeInput"
+                type="text"
+                placeholder="اكتب الكود هنا"
+                autocomplete="off"
+                maxlength="6"
+            >
+
+            <button class="confirm" onclick="verifyCode()">
+                تم
+            </button>
+
+            <div class="error" id="error">
+                ❌ الكود غير صحيح، حاول مرة أخرى
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- المرحلة الأخيرة -->
+    <div class="stage" id="stage5">
+
+        <div class="timer" id="timer5" style="--progress:0deg">
+            <div class="time" id="time5">01:00</div>
+            <div class="time-label">انتظر</div>
+        </div>
+
+        <div class="message">
+            انتظر...
+        </div>
+
+        <div class="warning">
+            ⚠️ جاري تجهيز الرابط النهائي<br>
+            لا تغلق الصفحة حتى انتهاء الوقت.
+        </div>
+
+        <div class="progress-box">
+            <div class="progress-bar" id="bar5"></div>
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        نظام تحميل الملفات • جميع الحقوق محفوظة
+    </div>
+
+</div>
+
+
+<script>
+
+const links = {
+
+    orange:
+    "https://www.mediafire.com/file/mw5zu0yl8gke523/mido_Orange_%25F0%259F%25A7%25A1.npvt/file",
+
+    etisalat:
+    "https://www.mediafire.com/file/7ipjykuzjjqvgxf/%25D8%25AE%25D8%25B7_%25D8%25A7%25D8%25%AA%25D8%25%B5%25D8%25%A7%25%D9%84%D8%A7%D8%AA_Hakamo_%25281%2529.npvt/file",
+
+    giga:
+    "https://www.mediafire.com/file/chfqqcrm1bpcuz5/%25D8%25A7%25D9%2582%25D9%88%25D9%8A_%25D9%83%25D9%88%25%D9%86%25D9%81%25D8%AC%25D8%A7%D8%AA_500_%25D9%85%25%D9%8A%25D8%AC%25D8%A7_%25D8%A7%25D8%AA%25D8%B5%25D8%A7%25D9%84%25F0%259F%258E%2581.zip/file"
+
+};
+
+let selectedLink = "";
+
+function showStage(id){
+
+    document.querySelectorAll(".stage").forEach(stage=>{
+        stage.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+}
+
+
+/* العداد */
+function startTimer(seconds, timeElement, barElement, timerElement, callback){
+
+    let remaining = seconds;
+
+    function update(){
+
+        let minutes = Math.floor(remaining / 60);
+        let secondsLeft = remaining % 60;
+
+        timeElement.textContent =
+            String(minutes).padStart(2,"0") + ":" +
+            String(secondsLeft).padStart(2,"0");
+
+        let progress = ((seconds - remaining) / seconds) * 100;
+
+        barElement.style.width = progress + "%";
+
+        timerElement.style.setProperty(
+            "--progress",
+            (progress * 3.6) + "deg"
+        );
+
+        if(remaining <= 0){
+
+            callback();
+            return;
+        }
+
+        remaining--;
+
+        setTimeout(update,1000);
     }
 
-    function closeModal() {
+    update();
+}
 
-      document.getElementById("verifyModal")
-        .classList.remove("show");
 
+/* أول 10 دقائق */
+startTimer(
+    600,
+    document.getElementById("time1"),
+    document.getElementById("bar1"),
+    document.getElementById("timer1"),
+    function(){
+
+        showStage("stage2");
+
+        /* دقيقتين */
+        startTimer(
+            120,
+            document.getElementById("time2"),
+            document.getElementById("bar2"),
+            document.getElementById("timer2"),
+            function(){
+
+                showStage("stage3");
+
+            }
+        );
     }
+);
 
-    function verifyCode() {
 
-      const input =
+/* اختيار الشبكة */
+function selectFile(type){
+
+    selectedLink = links[type];
+
+    showStage("stage4");
+
+    document.getElementById("codeInput").value = "";
+    document.getElementById("error").style.display = "none";
+}
+
+
+/* التحقق من الكود */
+function verifyCode(){
+
+    const input =
         document.getElementById("codeInput").value.trim();
 
-      const error =
-        document.getElementById("errorMessage");
+    const error =
+        document.getElementById("error");
 
-      if (input === VERIFY_CODE) {
+    if(input === "ttio33"){
 
         error.style.display = "none";
 
-        window.location.href = links[selectedNetwork];
+        showStage("stage5");
 
-      } else {
+        /* دقيقة واحدة */
+        startTimer(
+            60,
+            document.getElementById("time5"),
+            document.getElementById("bar5"),
+            document.getElementById("timer5"),
+            function(){
+
+                /*
+                 * فتح الرابط في نافذة/تبويب جديد.
+                 */
+                window.open(selectedLink, "_blank");
+
+            }
+        );
+
+    }else{
 
         error.style.display = "block";
 
-      }
-
     }
+}
 
-    /* السماح بالضغط على Enter */
-    document.getElementById("codeInput")
-      .addEventListener("keydown", function(event) {
-
-        if (event.key === "Enter") {
-          verifyCode();
-        }
-
-      });
-
-    /* إغلاق النافذة عند الضغط خارجها */
-    document.getElementById("verifyModal")
-      .addEventListener("click", function(event) {
-
-        if (event.target === this) {
-          closeModal();
-        }
-
-      });
-
-  </script>
+</script>
 
 </body>
 </html>
